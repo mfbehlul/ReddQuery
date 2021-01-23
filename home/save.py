@@ -34,5 +34,4 @@ def saveTheQuery(data):
             continue
 
     conn.commit()
-
     conn.close()

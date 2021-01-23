@@ -13,6 +13,8 @@ requests = "*"
 wordcloud = "*"
 matplotlib = "*"
 numpy = "*"
+textblob = "*"
+pandas = "*"
 
 [dev-packages]
 

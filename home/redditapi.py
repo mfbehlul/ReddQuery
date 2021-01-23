@@ -1,7 +1,8 @@
 import praw
 from praw.models import MoreComments
 from .wcdeneme import wordcloud_function
-
+from textblob import TextBlob
+import pandas as pd
 
 def reddit_function(keyword, limit_value, sort):
     reddit = praw.Reddit(
@@ -45,6 +46,8 @@ def reddit_function(keyword, limit_value, sort):
     print("array uzunlugu")
     print(len(textforwc))
     print(100*"#")
+    df=pd.DataFrame(data=result)
+    json=df.to_json()
     wordcloudtext = " ".join(textforwc)
     wcinstance = wordcloud_function(wordcloudtext)
-    return result, wcinstance
+    return df, wcinstance
