@@ -3,8 +3,10 @@ from praw.models import MoreComments
 from .wcdeneme import wordcloud_function
 from textblob import TextBlob
 import pandas as pd
+from .utctodatetime import timeConverter
+from .sentiment import getPolarity,getSubjectivity
 
-def reddit_function(keyword, limit_value, sort):
+def reddit_function(user,keyword, limit_value, sort):
     reddit = praw.Reddit(
         client_id='SQqqgzCGYZua-A',
         client_secret='HcI0XOLw7TDsq-wjAucvJ5jaQiF5Kg',
@@ -24,10 +26,9 @@ def reddit_function(keyword, limit_value, sort):
     textforwc = []
 
     for i in new_subreddit:
-        keys = ["post_id", "post", "score", "author", "subreddit", "comment"]
-        values = [i.id, i.title, i.score, i.author.name, i.subreddit.display_name]
+        keys = ["user","post_id", "post", "score", "author", "subreddit","createdTime", "comment"]
+        values = [user,i.id, i.title, i.score, i.author.name, i.subreddit.display_name,timeConverter(i.created_utc)]
         textforwc.append(i.title)
-        print(values)
         submission = reddit.submission(id=i.id)
         comment_array = []
 
@@ -35,7 +36,7 @@ def reddit_function(keyword, limit_value, sort):
             for top_level_comment in submission.comments:
                 if isinstance(top_level_comment, MoreComments):
                     continue
-                comment_array.append(top_level_comment.body)
+                comment_array.append(str(top_level_comment.body))
                 textforwc.append(top_level_comment.body)
                 values.append(comment_array)
 
@@ -47,7 +48,13 @@ def reddit_function(keyword, limit_value, sort):
     print(len(textforwc))
     print(100*"#")
     df=pd.DataFrame(data=result)
-    json=df.to_json()
+    commentdf=pd.DataFrame(data=[item for item in textforwc],columns=['comments'])
+    
+    commentdf['Subjectivity']=commentdf['comments'].apply(getSubjectivity)
+    commentdf['Polarity']=commentdf['comments'].apply(getPolarity)
+    print(commentdf)
+    
+
     wordcloudtext = " ".join(textforwc)
     wcinstance = wordcloud_function(wordcloudtext)
     return df, wcinstance

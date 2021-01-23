@@ -7,11 +7,13 @@ import psycopg2
 import praw
 from .wcdeneme import wordcloud_function
 from .save import saveTheQuery
+import json
 
 
 # Create your views here.
 
-global_datakeyword={}
+global_datakeyword = {}
+
 
 @login_required(login_url='login')
 def home_view(request):
@@ -21,19 +23,21 @@ def home_view(request):
     key = text.get("keyword", "")
     limit = int(text.get("limit", 10))
     sortby = str(text.get("sortby", ""))
-    savevalue=text.get("savebutton","")
+    savevalue = text.get("savebutton", "")
 
-    if (key != "")&(savevalue==""):
+    if (key != "") & (savevalue == ""):
 
-        datakeyword,wcinstance = reddit_function(
-            keyword=key, limit_value=limit, sort=sortby)
+        datakeyword, wcinstance = reddit_function(user=request.user,
+                                                  keyword=key, limit_value=limit, sort=sortby)
 
-        global_datakeyword=datakeyword
-        context = {"data": datakeyword,
+        json_records = datakeyword.reset_index().to_json(orient='records')
+        dataJson = []
+        dataJson = json.loads(json_records)
+        global_datakeyword = datakeyword
+        context = {"data": dataJson,
                    "table": "visible", "wcimage": wcinstance}
 
-    if (savevalue !="")&(key==""):
+    if (savevalue != "") & (key == ""):
         saveTheQuery(global_datakeyword)
-        
-    return render(request, 'homepage.html', context)
 
+    return render(request, 'homepage.html', context)

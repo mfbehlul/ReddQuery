@@ -9,4 +9,5 @@ class Results(models.Model):
     subreddit=models.CharField(max_length=1200)
     comment=models.CharField(max_length=4800)
     
-   
+    def __str__(self):
+       return self.title
