@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     />
-  
+
     <title>ReddQuery</title>
   </head>
   <body>
@@ -78,16 +78,21 @@
           <button type="submit" class="btn btn-dark btn-block mt-4">
             Search
           </button>
-          <button type="submit" class="btn btn-dark btn-block mt-4" value= "clicked" name="savebutton">
+          <button
+            type="submit"
+            class="btn btn-dark btn-block mt-4"
+            value="clicked"
+            name="savebutton"
+          >
             Save the Query
           </button>
         </form>
       </div>
       {%endblock%} {% if table == "visible" %}
       <div id="container">
-        <div id ="wcshow">
-          <img width = "90%" height="80%" src="{{wcimage}}">
-         </div>
+        <div id="wcshow">
+          <img width="90%" height="80%" src="{{wcimage}}" />
+        </div>
         <div class="row">
           <table
             class="col-xs-7 table-bordered table-striped table-condensed table-fixed"
@@ -111,6 +116,7 @@
                 <td class="col">{{submission.author}}</td>
                 <td class="col">{{submission.subreddit}}</td>
                 <td class="col">{{submission.createdTime}}</td>
+                <td class="col">{{comment.body}}</td>
               </tr>
               {%endfor%}
             </tbody>

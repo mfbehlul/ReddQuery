@@ -27,13 +27,14 @@ def home_view(request):
 
     if (key != "") & (savevalue == ""):
 
-        datakeyword, wcinstance = reddit_function(user=request.user,
+        datakeyword, wcinstance, commentdata = reddit_function(user=request.user,
                                                   keyword=key, limit_value=limit, sort=sortby)
 
         json_records = datakeyword.reset_index().to_json(orient='records')
         dataJson = []
         dataJson = json.loads(json_records)
-        global_datakeyword = datakeyword
+        
+        global_datakeyword = dataJson
         context = {"data": dataJson,
                    "table": "visible", "wcimage": wcinstance}
 
