@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_view
 from accounts.views import login_view,register_view
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +25,5 @@ urlpatterns = [
     path('login/', login_view, name="login"),
     path('logout/', login_view, name="logout"),
     path('register/', register_view, name="register"),
+    path('index/', TemplateView.as_view(template_name='base.html')),
 ]
