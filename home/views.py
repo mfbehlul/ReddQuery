@@ -39,6 +39,7 @@ def home_view(request):
                    "table": "visible", "wcimage": wcinstance}
 
     if (savevalue != "") & (key == ""):
+        
         saveTheQuery(global_datakeyword)
 
-    return render(request, 'homepage.html', context)
+    return render(request, 'base.html', context)

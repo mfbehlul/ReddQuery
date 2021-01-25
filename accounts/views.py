@@ -18,7 +18,7 @@ def register_view(request):
                 messages.success(request,'Account is created for '+ user)
                 return redirect('login')
         context={'form':form}
-        return render(request,'accounts/register.html',context)
+        return render(request,'accounts/oldregister.html',context)
 
 
 def login_view(request):
@@ -38,7 +38,7 @@ def login_view(request):
                 messages.info(request, 'Username or Password is incorrect')
             
         context={}
-        return render(request,'accounts/login.html',context)
+        return render(request,'accounts/oldlogin.html',context)
 
 
 def logoutUser(request):
