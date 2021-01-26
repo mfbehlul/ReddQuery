@@ -30,6 +30,8 @@ def home_view(request):
         datakeyword, wcinstance, commentdata = reddit_function(user=request.user,
                                                   keyword=key, limit_value=limit, sort=sortby)
 
+
+        print(datakeyword)
         json_records = datakeyword.reset_index().to_json(orient='records')
         dataJson = []
         dataJson = json.loads(json_records)
@@ -42,4 +44,9 @@ def home_view(request):
         
         saveTheQuery(global_datakeyword)
 
-    return render(request, 'base.html', context)
+    return render(request, 'homepage.html', context)
+
+def table_view(request):
+    context={"data":global_datakeyword}
+
+    return render (request,'tables.html',context)

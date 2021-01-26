@@ -19,6 +19,9 @@
   <!-- Custom styles for this template-->
   <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 
+   <!-- Custom styles for this page -->
+   <link href="{% static 'css/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
@@ -199,85 +202,9 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-          <!-- Page Heading -->
-          <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-            <a href="#" data-toggle="modal" data-target="#saveModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Save the Query</a>
-          </div>
-
-          <!-- Content Row -->
-          <div class="row">
-
-            <div id="search-container" class="container">
-              {% block content %}
-        
-              <div id="search" class="card card-body bg-light mb-2">
-                <h4>Search on Reddit</h4>
-                <form id="search-form">
-                  <div class="form-group">
-                    <input
-                      type="text"
-                      id="search-input"
-                      class="form-control mb-3"
-                      placeholder="Search Term..."
-                      name="keyword"
-                    />
-                  </div>
-                  <div class="form-check form-check-inline">
-                    Sort By:
-                    <input
-                      class="form-check-input ml-2"
-                      type="radio"
-                      name="sortby"
-                      value="hot"
-                      checked
-                    />
-                    <label class="form-check-label"> Hot </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="sortby"
-                      value="new"
-                    />
-                    <label class="form-check-label"> New </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="sortby"
-                      value="top"
-                    />
-                    <label class="form-check-label"> Top </label>
-                  </div>
-                  <h5 class="mt-2">Limit:</h5>
-                  <div class="form-group">
-                    <select name="limit" id="limit" class="form-control">
-                      <option value="5">5</option>
-                      <option value="10">10</option>
-                      <option value="25" selected>25</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                    </select>
-                  </div>
-                  <button type="submit" class="btn btn-primary btn-block mt-4">
-                    Search
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn-primary btn-block mt-4"
-                    value="clicked"
-                    name="savebutton"
-                  >
-                    Save the Query
-                  </button>
-                </form>
-              </div>
-              {%endblock%}
-
-          </div>
+        {% block content %} {% endblock content %}
+        </div>        
+      </div>
       <!-- End of Main Content -->
 
       <!-- Footer -->
@@ -363,10 +290,13 @@
 
   <!-- Page level plugins -->
   <script src="{% static 'js/Chart.min.js' %}"></script>
+  <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'js/dataTables.bootstrap4.min.js' %}"></script>
 
   <!-- Page level custom scripts -->
   <script src="{% static 'js/chart-area-demo.js' %}"></script>
   <script src="{% static 'js/chart-pie-demo.js' %}"></script>
+  <script src="{% static 'js/datatables-demo.js' %}"></script>
 
 </body>
 

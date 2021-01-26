@@ -34,6 +34,10 @@ def reddit_function(user,keyword, limit_value, sort):
         subjectivity_array=[]
         polarity_array=[]
 
+        analysis=TextBlob(i.title)
+        subjectivity_array.append(analysis.sentiment.subjectivity)
+        polarity_array.append(analysis.sentiment.polarity)
+
         try:
             for top_level_comment in submission.comments:
                 if isinstance(top_level_comment, MoreComments):
@@ -60,7 +64,7 @@ def reddit_function(user,keyword, limit_value, sort):
     commentdf['Subjectivity']=commentdf['comments'].apply(getSubjectivity)
     commentdf['Polarity']=commentdf['comments'].apply(getPolarity)
     #print(df)
-   # print(commentdf)
+    print(commentdf)
 
     wordcloudtext = " ".join(textforwc)
     wcinstance = wordcloud_function(wordcloudtext)
