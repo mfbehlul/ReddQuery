@@ -64,7 +64,7 @@ def reddit_function(user,keyword, limit_value, sort):
     commentdf['Subjectivity']=commentdf['comments'].apply(getSubjectivity)
     commentdf['Polarity']=commentdf['comments'].apply(getPolarity)
     #print(df)
-    print(commentdf)
+    #print(commentdf)
 
     wordcloudtext = " ".join(textforwc)
     wcinstance = wordcloud_function(wordcloudtext)

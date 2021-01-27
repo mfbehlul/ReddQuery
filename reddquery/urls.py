@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from home.views import home_view
 from home.views import table_view
+from home.views import wordcloud_view
 from accounts.views import login_view,register_view
 from django.views.generic import TemplateView
 
@@ -27,4 +28,5 @@ urlpatterns = [
     path('logout/', login_view, name="logout"),
     path('register/', register_view, name="register"),
     path('tables/', table_view, name="tables"),
+    path('wordcloud/', wordcloud_view, name="wordcloud"),
 ]

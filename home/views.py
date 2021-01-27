@@ -13,11 +13,12 @@ import json
 # Create your views here.
 
 global_datakeyword = {}
-
+global_wcinstance=""
 
 @login_required(login_url='login')
 def home_view(request):
     global global_datakeyword
+    global global_wcinstance
     text = request.GET
     context = {}
     key = text.get("keyword", "")
@@ -31,11 +32,11 @@ def home_view(request):
                                                   keyword=key, limit_value=limit, sort=sortby)
 
 
-        print(datakeyword)
+        #print(datakeyword)
         json_records = datakeyword.reset_index().to_json(orient='records')
         dataJson = []
         dataJson = json.loads(json_records)
-        
+        global_wcinstance=wcinstance
         global_datakeyword = dataJson
         context = {"data": dataJson,
                    "table": "visible", "wcimage": wcinstance}
@@ -50,3 +51,8 @@ def table_view(request):
     context={"data":global_datakeyword}
 
     return render (request,'tables.html',context)
+
+def wordcloud_view(request):
+    context={"wcimage":global_wcinstance}
+
+    return render (request,'wordcloud.html',context)

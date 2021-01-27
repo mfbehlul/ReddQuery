@@ -61,7 +61,7 @@
             type="date"
             id="date-input"
             class="form-control mb-3 "
-            placeholder="Search Term..."
+            placeholder="yyyy-mm-dd"
             name="fromdate"
           />
         </div>
@@ -71,7 +71,7 @@
             type="date"
             id="date-input"
             class="form-control mb-3"
-            placeholder="Search Term..."
+            placeholder="yyyy-mm-dd"
             name="todate"
           />
         </div>
@@ -103,10 +103,7 @@
   </div>
 </div>
 {% if table == "visible" %}
-<div id="container">
-  <div id="wcshow">
-    <img width="90%" height="80%" src="{{wcimage}}" />
-  </div>
+
 {%endif%}
 
 {% endblock content%}
