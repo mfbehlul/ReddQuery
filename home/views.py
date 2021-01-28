@@ -10,10 +10,13 @@ from .save import saveTheQuery
 import json
 
 
+
+
 # Create your views here.
 
 global_datakeyword = {}
-global_wcinstance=""
+global_wcinstance = ""
+
 
 @login_required(login_url='login')
 def home_view(request):
@@ -29,30 +32,32 @@ def home_view(request):
     if (key != "") & (savevalue == ""):
 
         datakeyword, wcinstance, commentdata = reddit_function(user=request.user,
-                                                  keyword=key, limit_value=limit, sort=sortby)
+                                                               keyword=key, limit_value=limit, sort=sortby)
 
-
-        #print(datakeyword)
+        # print(datakeyword)
         json_records = datakeyword.reset_index().to_json(orient='records')
         dataJson = []
         dataJson = json.loads(json_records)
-        global_wcinstance=wcinstance
+        global_wcinstance = wcinstance
         global_datakeyword = dataJson
         context = {"data": dataJson,
-                   "table": "visible", "wcimage": wcinstance}
+                   "wcimage": wcinstance}
 
+    name=str(request.user)
     if (savevalue != "") & (key == ""):
-        
-        saveTheQuery(global_datakeyword)
 
+        saveTheQuery(global_datakeyword,name)
+        
     return render(request, 'homepage.html', context)
 
-def table_view(request):
-    context={"data":global_datakeyword}
 
-    return render (request,'tables.html',context)
+def table_view(request):
+    context = {"data": global_datakeyword}
+
+    return render(request, 'tables.html', context)
+
 
 def wordcloud_view(request):
-    context={"wcimage":global_wcinstance}
+    context = {"wcimage": global_wcinstance}
 
-    return render (request,'wordcloud.html',context)
+    return render(request, 'wordcloud.html', context)

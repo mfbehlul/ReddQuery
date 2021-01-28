@@ -55,26 +55,7 @@
           />
           <label class="form-check-label"> Top </label>
         </div>
-        <h5 class="mt-2"> From:</h5>
-        <div class="form-group">
-          <input
-            type="date"
-            id="date-input"
-            class="form-control mb-3 "
-            placeholder="yyyy-mm-dd"
-            name="fromdate"
-          />
-        </div>
-        <h5 class="mt-2"> To:</h5>
-        <div class="form-group">
-          <input
-            type="date"
-            id="date-input"
-            class="form-control mb-3"
-            placeholder="yyyy-mm-dd"
-            name="todate"
-          />
-        </div>
+     
 
 
         <h5 class="mt-2">Limit:</h5>
@@ -90,20 +71,10 @@
         <button type="submit" class="btn btn-primary btn-block mt-4">
           Search
         </button>
-        <button
-          type="submit"
-          class="btn btn-primary btn-block mt-4"
-          value="clicked"
-          name="savebutton"
-        >
-          Save the Query
-        </button>
       </form>
     </div>
   </div>
 </div>
-{% if table == "visible" %}
 
-{%endif%}
 
 {% endblock content%}

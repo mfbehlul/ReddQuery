@@ -10,7 +10,8 @@ class Results(models.Model):
     comment=models.CharField(max_length=4800)
     subjectivity=models.CharField(max_length=32)
     polarity=models.CharField(max_length=32)
-    time=models.CharField(max_length=512)
+    querydate=models.CharField(max_length=64)
+    queryuser=models.CharField(max_length=16)
     
     def __str__(self):
        return self.title
