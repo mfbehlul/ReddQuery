@@ -5,6 +5,7 @@ import re
 
 def cleanText(text):
     text=re.sub(r'https?:\/\/\S+','',text)
+    text=re.sub(r'deleted','',text)
     return text
 
 def getSubjectivity(text):

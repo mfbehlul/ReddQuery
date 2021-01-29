@@ -18,6 +18,7 @@ from django.urls import path
 from home.views import home_view
 from home.views import table_view
 from home.views import wordcloud_view
+from home.views import savedquery_view
 from accounts.views import login_view,register_view
 from django.views.generic import TemplateView
 
@@ -29,4 +30,5 @@ urlpatterns = [
     path('register/', register_view, name="register"),
     path('tables/', table_view, name="tables"),
     path('wordcloud/', wordcloud_view, name="wordcloud"),
+    path('savedquery/', savedquery_view, name="savedquery"),
 ]

@@ -16,15 +16,8 @@ def saveTheQuery(data, name):
     cur = conn.cursor()
 
     for item in data:
-
-        try:
-            for top_level_comment, polarity_value, subjectivity_value in zip(item["comment"], item["polarity"], item["subjectivity"]):
-
-                cur.execute("INSERT INTO results_results(title,postid,score,author,subreddit,comment,polarity,subjectivity,querydate,queryuser)values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
-                            (item["post"], item["post_id"], item["score"], item["author"], item["subreddit"], top_level_comment, polarity_value, subjectivity_value, date.today(),name ))
-
-        except KeyError:
-            continue
+        cur.execute("INSERT INTO results_results(author,subreddit,comment,polarity,subjectivity,querydate,queryuser,sentiment)values(%s,%s,%s,%s,%s,%s,%s,%s)",
+                    (item["author"], item["subreddit"], item["comment"], item["polarity"], item["subjectivity"], date.today(), name, "nodata"))
 
     conn.commit()
     conn.close()

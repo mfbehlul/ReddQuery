@@ -21,9 +21,9 @@
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Post Title</th>
-                <th>Post ID</th>
-                <th>Score</th>
+                <th>Comment</th>
+                <th>Subjectivity Score</th>
+                <th>Polarity Score</th>
                 <th>Author</th>
                 <th>Subreddit</th>
                 <th>Created Time</th>
@@ -31,9 +31,9 @@
             </thead>
             <tfoot>
               <tr>
-                <th>Post Title</th>
-                <th>Post ID</th>
-                <th>Score</th>
+                <th>Comment</th>
+                <th>Subjectivity Score</th>
+                <th>Polarity Score</th>
                 <th>Author</th>
                 <th>Subreddit</th>
                 <th>Created Time</th>
@@ -42,12 +42,12 @@
             <tbody>
               {% for submission in data %}
               <tr>
-                <td>{{submission.post}}</td>
-                <td>{{submission.post_id}}</td>
-                <td>{{submission.score}}</td>
+                <td>{{submission.comment}}</td>
+                <td>{{submission.subjectivity}}</td>
+                <td>{{submission.polarity}}</td>
                 <td>{{submission.author}}</td>
                 <td>{{submission.subreddit}}</td>
-                <td>{{submission.createdTime}}</td>
+                <td>{{submission.querydate}}</td>
               </tr>
               {%endfor%}
             </tbody>
