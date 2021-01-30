@@ -17,7 +17,7 @@ def saveTheQuery(data, name):
 
     for item in data:
         cur.execute("INSERT INTO results_results(author,subreddit,comment,polarity,subjectivity,querydate,queryuser,sentiment)values(%s,%s,%s,%s,%s,%s,%s,%s)",
-                    (item["author"], item["subreddit"], item["comment"], item["polarity"], item["subjectivity"], date.today(), name, "nodata"))
+                    (item["author"], item["subreddit"], item["comment"], item["polarity"], item["subjectivity"], date.today(), name, item["sentiment"]))
 
     conn.commit()
     conn.close()

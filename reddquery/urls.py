@@ -19,6 +19,8 @@ from home.views import home_view
 from home.views import table_view
 from home.views import wordcloud_view
 from home.views import savedquery_view
+from home.views import sentiment_view
+from home.views import deletequery_view
 from accounts.views import login_view,register_view
 from django.views.generic import TemplateView
 
@@ -31,4 +33,6 @@ urlpatterns = [
     path('tables/', table_view, name="tables"),
     path('wordcloud/', wordcloud_view, name="wordcloud"),
     path('savedquery/', savedquery_view, name="savedquery"),
+    path('sentiment/', sentiment_view, name="sentiment"),
+    path('deletequery/', deletequery_view, name="deletequery"),
 ]
