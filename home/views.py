@@ -6,12 +6,11 @@ from results.models import Results
 import psycopg2
 import praw
 from .wc import wordcloud_function
-from .save import saveTheQuery
+from .database import saveTheQuery, deleteTheQuery, fetchTheQuery
 import json
 from results.models import Results
 import pandas as pd
 import re
-from .deletequery import deleteTheQuery
 from .sentiment import plotTheSentiment
 
 # Create your views here.
@@ -28,11 +27,11 @@ def home_view(request):
     global global_sentimentinstance
 
     text = request.GET
-    
+
     key = text.get("keyword", "")
     limit = int(text.get("limit", 10))
     sortby = str(text.get("sortby", ""))
-    isSearch="False"
+    isSearch = "False"
 
     if key == "":
         global_sentimentinstance = ""
@@ -49,28 +48,25 @@ def home_view(request):
         dataJson = json.loads(json_records)
         global_datakeyword = dataJson
         global_wcinstance = wcinstance
-        #print(type(commentdata))
         global_sentimentinstance = plotTheSentiment(commentdata)
-        isSearch="True"
-        
+        isSearch = "True"
 
-    context = {"isSearch":isSearch}
+    context = {"isSearch": isSearch}
     return render(request, 'homepage.html', context)
 
 
 def table_view(request):
-    text=request.GET
+    text = request.GET
     savevalue = text.get("savebutton", "")
     name = str(request.user)
-    
-    tablesaved="False"
+
+    tablesaved = "False"
     if savevalue != "":
         saveTheQuery(global_datakeyword, name)
-       
-        tablesaved="True"
-        
 
-    context = {"data": global_datakeyword,"isSaved":tablesaved}
+        tablesaved = "True"
+
+    context = {"data": global_datakeyword, "isSaved": tablesaved}
 
     return render(request, 'tables.html', context)
 
@@ -95,42 +91,11 @@ def savedquery_view(request):
     global_sentimentinstance = ""
     global_wcinstance = ""
     global_datakeyword = [{'index': 0, 'Comment': '',
-                               'Subjectivity': 0, 'Polarity':0 , 'Querydate': '2021-01-07', 'Subreddit': 'litecoin', 'Author': 'Blitzpocket'}]
+                           'Subjectivity': 0, 'Polarity': 0, 'Querydate': '2021-01-07', 'Subreddit': 'litecoin', 'Author': 'Blitzpocket'}]
 
-    issaved="False"
-    conn = psycopg2.connect(
-        database="da4973spbbo8pi",
-        user="fyffloodpxarwp",
-        password="552eb5c1db0ddc25a9ab1bb8dbc46b822334782e1cd8a55b0f50270749f0caef",
-        host="ec2-54-235-158-17.compute-1.amazonaws.com",
-        port="5432"
-    )
-
-    cur = conn.cursor()
-
-    cur.execute("select author, subreddit, comment, polarity, subjectivity, querydate, queryuser, sentiment from results_results")
-    headers=["author","subreddit","comment", "polarity","subjectivity","querydate","queryuser","sentiment"]
-    rows=cur.fetchall()
-    df=pd.DataFrame(rows,columns=headers)
-    conn.commit()
-    cur.close()
-    conn.close()
-
-    """results = list(Results.objects.all())
-
-    database_results = []
-    for i in results:
-        keys = ['author', 'subreddit', 'comment', 'polarity',
-                'subjectivity', 'querydate', 'queryuser', 'sentiment']
-        values = [i.author, i.subreddit, i.comment, i.polarity,
-                  i.subjectivity, i.querydate, i.queryuser, i.sentiment]
-        database_results.append(dict(zip(keys, values)))
-
-    df = pd.DataFrame(database_results, columns=[
-        'author', 'subreddit', 'comment', 'polarity', 'subjectivity', 'querydate', 'queryuser', 'sentiment'])"""
-
+    issaved = "False"
+    df=fetchTheQuery()
     df = df[df["queryuser"] == str(request.user)]
-
     dates = list(df["querydate"])
     subreddits = list(df["subreddit"])
     dates_and_keywords = list(set(zip(dates, subreddits)))
@@ -161,13 +126,10 @@ def savedquery_view(request):
         wcinstance = wordcloud_function(wordcloudtext)
 
         global_wcinstance = wcinstance
-        # print(df)
-        # print(df["polarity"].value_counts())
-        print(type(df))
         global_sentimentinstance = plotTheSentiment(df)
-        issaved="True"
+        issaved = "True"
 
-    context = {"searchword": dates_and_keywords,"isSearch":issaved}
+    context = {"searchword": dates_and_keywords, "isSearch": issaved}
 
     return render(request, 'savedquery.html', context)
 
@@ -180,42 +142,11 @@ def deletequery_view(request):
     global_sentimentinstance = ""
     global_wcinstance = ""
     global_datakeyword = [{'index': 0, 'Comment': '',
-                               'Subjectivity': 0, 'Polarity':0 , 'Querydate': '2021-01-07', 'Subreddit': 'litecoin', 'Author': 'Blitzpocket'}]
-    isdeleted="False"
-    conn = psycopg2.connect(
-        database="da4973spbbo8pi",
-        user="fyffloodpxarwp",
-        password="552eb5c1db0ddc25a9ab1bb8dbc46b822334782e1cd8a55b0f50270749f0caef",
-        host="ec2-54-235-158-17.compute-1.amazonaws.com",
-        port="5432"
-    )
+                           'Subjectivity': 0, 'Polarity': 0, 'Querydate': '2021-01-07', 'Subreddit': 'litecoin', 'Author': 'Blitzpocket'}]
+    isdeleted = "False"
 
-    cur = conn.cursor()
-
-    cur.execute("select author, subreddit, comment, polarity, subjectivity, querydate, queryuser, sentiment from results_results")
-    headers=["author","subreddit","comment", "polarity","subjectivity","querydate","queryuser","sentiment"]
-    rows=cur.fetchall()
-    df=pd.DataFrame(rows,columns=headers)
-    conn.commit()
-    cur.close()
-    conn.close()
-
-    """
-    results = list(Results.objects.all())
-
-    database_results = []
-    for i in results:
-        keys = ['author', 'subreddit', 'comment', 'polarity',
-                'subjectivity', 'querydate', 'queryuser', 'sentiment']
-        values = [i.author, i.subreddit, i.comment, i.polarity,
-                  i.subjectivity, i.querydate, i.queryuser, i.sentiment]
-        database_results.append(dict(zip(keys, values)))
-
-    df = pd.DataFrame(database_results, columns=[
-        'author', 'subreddit', 'comment', 'polarity', 'subjectivity', 'querydate', 'queryuser', 'sentiment'])"""
-
+    df = fetchTheQuery()
     df = df[df["queryuser"] == str(request.user)]
-
     dates = list(df["querydate"])
     subreddits = list(df["subreddit"])
     dates_and_keywords = list(set(zip(dates, subreddits)))
@@ -232,7 +163,7 @@ def deletequery_view(request):
         selected_date = re.search("'(.*)'", splitted_value_list[0])
         selected_date = selected_date.group(1)
         deleteTheQuery(selected_keyword, str(request.user), selected_date)
-        isdeleted="True"
+        isdeleted = "True"
 
-    context = {"searchword": dates_and_keywords,"isSearch":isdeleted}
+    context = {"searchword": dates_and_keywords, "isSearch": isdeleted}
     return render(request, 'deletequery.html', context)
