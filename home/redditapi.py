@@ -10,9 +10,9 @@ from .sentiment import getPolarity,getSubjectivity,getPolarityResult
 
 def reddit_function(user, keyword, limit_value, sort):
     reddit = praw.Reddit(
-        client_id='SQqqgzCGYZua-A',
-        client_secret='HcI0XOLw7TDsq-wjAucvJ5jaQiF5Kg',
-        user_agent='prawtutorial'
+        client_id='',
+        client_secret='',
+        user_agent=''
     )
 
     subreddit = reddit.subreddit(keyword)

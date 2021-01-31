@@ -5,11 +5,11 @@ import pandas as pd
 
 def saveTheQuery(data, name):
     conn = psycopg2.connect(
-        database="da4973spbbo8pi",
-        user="fyffloodpxarwp",
-        password="552eb5c1db0ddc25a9ab1bb8dbc46b822334782e1cd8a55b0f50270749f0caef",
-        host="ec2-54-235-158-17.compute-1.amazonaws.com",
-        port="5432"
+        database="",
+        user="",
+        password="",
+        host="",
+        port=""
     )
 
     cur = conn.cursor()
@@ -25,11 +25,11 @@ def saveTheQuery(data, name):
 
 def deleteTheQuery(querykeyword, queryuser, querydate):
     conn = psycopg2.connect(
-        database="da4973spbbo8pi",
-        user="fyffloodpxarwp",
-        password="552eb5c1db0ddc25a9ab1bb8dbc46b822334782e1cd8a55b0f50270749f0caef",
-        host="ec2-54-235-158-17.compute-1.amazonaws.com",
-        port="5432"
+        database="",
+        user="",
+        password="",
+        host="",
+        port=""
     )
 
     cur = conn.cursor()
@@ -42,11 +42,11 @@ def deleteTheQuery(querykeyword, queryuser, querydate):
 def fetchTheQuery():
 
     conn = psycopg2.connect(
-        database="da4973spbbo8pi",
-        user="fyffloodpxarwp",
-        password="552eb5c1db0ddc25a9ab1bb8dbc46b822334782e1cd8a55b0f50270749f0caef",
-        host="ec2-54-235-158-17.compute-1.amazonaws.com",
-        port="5432"
+        database="",
+        user="",
+        password="",
+        host="",
+        port=""
     )
 
     cur = conn.cursor()
