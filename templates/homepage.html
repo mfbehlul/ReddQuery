@@ -5,7 +5,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
   <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-  <a href="#" data-toggle="modal" data-target="#saveModal" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Save the Query</a>
 </div>
 
 <!-- Content Row -->
@@ -15,7 +14,8 @@
     
 
     <div id="search" class="card card-body bg-light mb-2">
-      <h4>Search on Reddit</h4>
+      <h4>Search on SubReddit</h4>
+      <p>Please give the exact subreddit name as a keyword.(eg.,covid19,bitcoin,joebiden..etc.)</p>
       <form id="search-form">
         <div class="form-group">
           <input
@@ -35,7 +35,7 @@
             value="hot"
             checked
           />
-          <label class="form-check-label"> Hot </label>
+          <label class="form-check-label"> Hot Topic </label>
         </div>
         <div class="form-check form-check-inline">
           <input
@@ -44,7 +44,7 @@
             name="sortby"
             value="new"
           />
-          <label class="form-check-label"> New </label>
+          <label class="form-check-label"> New Topic</label>
         </div>
         <div class="form-check form-check-inline">
           <input
@@ -53,19 +53,20 @@
             name="sortby"
             value="top"
           />
-          <label class="form-check-label"> Top </label>
+          <label class="form-check-label"> Top Topic </label>
         </div>
      
 
 
         <h5 class="mt-2">Limit:</h5>
+        <p>Please select for how many submission you want to search.(If you select 5, you will get the comments that belong to 5 submissions. </p>
         <div class="form-group">
           <select name="limit" id="limit" class="form-control">
-            <option value="5">5</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="5" selected>5</option>
             <option value="10">10</option>
-            <option value="25" selected>25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
+            <option value="15">15</option>
           </select>
         </div>
         <button type="submit" class="btn btn-primary btn-block mt-4">
@@ -74,6 +75,9 @@
       </form>
     </div>
   </div>
+  {% if isSearch == "True" %}
+  <h5 class="h3 mb-0 text-green-800"><br>Your query is completed. You can check your analysis from Analysis part of the sidebar.</h5>
+  {%endif%}
 </div>
 
 

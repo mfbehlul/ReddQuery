@@ -9,7 +9,7 @@
 <form id="search-form">
     <h5 class="mt-2"><p>Please select one of your saved query that you want to delete</p></h5>
     <div class="form-group">
-      <select name="query" id="query" class="form-control">
+      <select name="query" id="limit" class="form-control">
         {% for key in searchword %}
         <option value="{{key}}">{{key}}</option>
         {%endfor%}
@@ -19,7 +19,10 @@
         Delete the Query!
       </button>
 </form>
-    
+ 
+{% if isSearch == "True" %}
+  <h5 class="h3 mb-0 text-gray-800"><br>Your saved query is deleted succesfully.</h5>
+{%endif%}
 </div>
 
 {% endblock content %}

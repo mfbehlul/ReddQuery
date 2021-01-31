@@ -32,14 +32,19 @@ def getPolarityResult(text):
 
 def plotTheSentiment(df):
     plt.figure(figsize=(8,6))
-    for i in range(0,df.shape[0]):
-        plt.scatter(df["polarity"][i],df["subjectivity"][i], color="Blue")
+    string=""
+    image64=""
+   
+   
+    for i,row in df.iterrows():
+        plt.scatter(row["polarity"],row["subjectivity"], color="Blue")
 
     plt.title("Sentiment Analysis")
-    plt.xlabel("Polarity")
-    plt.ylabel("Subjectivity")
-    plt.show()
+    plt.xlabel("Polarity Value")
+    plt.ylabel("Subjectivity Value")
     
+    
+
     image=io.BytesIO()
     plt.savefig(image,format='png')
     image.seek(0)

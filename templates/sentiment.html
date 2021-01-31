@@ -2,12 +2,17 @@
 
 {% block content %}
 
-
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Sentiment Analysis</h1>
+</div>
+{% if sentimentimage != "" %}
 <div id="container">
   <div id="sentimentshow">
     <img width="90%" height="80%" src="{{sentimentimage}}" />
   </div>
 </div>
 
+{%endif%}
 
 {% endblock content %}

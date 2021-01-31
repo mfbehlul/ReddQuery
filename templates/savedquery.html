@@ -2,24 +2,34 @@
 
 {% block content %}
 
+<div class="row">
 
-<div id="container">
-
+  <div id="search-container" class="container">
     
-<form id="search-form">
-    <h5 class="mt-2"><p>Please select one of your saved query that you want to retrieve from database</p></h5>
-    <div class="form-group">
-      <select name="query" id="query" class="form-control">
-        {% for key in searchword %}
-        <option value="{{key}}">{{key}}</option>
-        {%endfor%}
-      </select>
+
+    <div id="search" class="card card-body bg-light mb-2">
+      <form id="search-form">
+
+        <h5 class="mt-2">Please select one of your saved query that you want to retrieve from database</h5>
+        <div class="form-group">
+          <select name="query" id="limit" class="form-control">
+            {% for key in searchword %}
+            <option value="{{key}}">{{key}}</option>
+            {%endfor%}
+            
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block mt-4">
+          Retrieve the Query!
+        </button>
+      </form>
     </div>
-    <button type="submit" class="btn btn-primary btn-block mt-4">
-        Retrieve the Query!
-      </button>
-</form>
-    
+  </div>
+
+  {% if isSearch == "True" %}
+  <h5 class="h3 mb-0 text-gray-800"><br>Your query is retrieved succesfully. You can check your analysis from Analysis part of the sidebar.</h5>
+  {%endif%}
 </div>
+
 
 {% endblock content %}

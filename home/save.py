@@ -20,4 +20,5 @@ def saveTheQuery(data, name):
                     (item["author"], item["subreddit"], item["comment"], item["polarity"], item["subjectivity"], date.today(), name, item["sentiment"]))
 
     conn.commit()
+    cur.close()
     conn.close()
