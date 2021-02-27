@@ -98,11 +98,14 @@ Users are redirecting to login page when they enter to website. After registerin
 
 
 Home page consists of following elements:
-•	Navbar
-•	Sidebar
-•	Search form
-	Side bar consists of three different sub-part. Those are Queries, Analysis and Pages
 
+•	Navbar
+
+•	Sidebar
+
+•	Search form
+
+Side bar consists of three different sub-part. Those are Queries, Analysis and Pages
 
 
 ## QUERY
